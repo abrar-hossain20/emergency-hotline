@@ -11,13 +11,18 @@ const services = [
 ];
 
 
+// Counters
+let heartCount = 0;
+let coinCount = 100;
+let copyCount = 0;
+
 // DOM
-// const cardSection = document.getElementById("cardSection");
-// const heartDisplay = document.getElementById("heartCount");
-// const coinDisplay = document.getElementById("coinCount");
-// const copyDisplay = document.getElementById("copyCount");
-// const historyList = document.getElementById("historyList");
-// const clearHistoryBtn = document.getElementById("clearHistory");
+const cardSection = document.getElementById("cardSection");
+const heartDisplay = document.getElementById("heartCount");
+const coinDisplay = document.getElementById("coinCount");
+const copyDisplay = document.getElementById("copyCount");
+const historyList = document.getElementById("historyList");
+const clearHistoryBtn = document.getElementById("clearHistory");
 
 // Render Cards
 services.forEach(service => {
