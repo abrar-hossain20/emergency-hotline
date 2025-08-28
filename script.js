@@ -88,3 +88,8 @@ services.forEach(service => {
         historyList.appendChild(li);
     });
 });
+
+// Clear History
+clearHistoryBtn.addEventListener("click", () => {
+    historyList.innerHTML = "";
+});
