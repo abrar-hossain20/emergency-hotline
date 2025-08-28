@@ -9,7 +9,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <!-- Navbar -->
+    <nav class="navbar bg-white px-6 text-black">
+        <div class="flex-1 flex items-center gap-2">
+            <img src="assets/logo.png" alt="BD Logo" class="h-10 w-10" />
+            <span class="font-semi-bold text-md text-green-800 w-10">Emergency Service</span>
+        </div>
+        <div class="flex-none flex items-center gap-6">
+            <div class="flex items-center gap-1 bg-green-100 px-4 py-2 rounded-full">
+                <span id="heartCount">0</span>
+                <span class="text-red-500">❤️</span>
+
+            </div>
+            <div class="flex items-center gap-1 bg-green-100 px-4 py-2 rounded-full ">
+                <span class="text-yellow-400">
+                    <img src="assets/coin.png" alt="BD Logo" class="h-5 w-5" />
+                </span>
+                <span id="coinCount">100</span>
+            </div>
+            <div class="flex items-center gap-1 text-white px-3 py-1 bg-green-500 px-4 py-2 rounded-full">
+                <span id="copyCount">0</span>
+                <span>Copy</span>
+            </div>
+        </div>
+    </nav>
 
     <script src="script.js"></script>
 </body>
