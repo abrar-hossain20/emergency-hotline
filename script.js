@@ -1,15 +1,68 @@
 const services = [
-    { name: "National Emergency Number", en: "National Emergency", number: "999", category: "All", icon: "assets/emergency.png" },
-    { name: "Police Helpline Number", en: "Police", number: "999", category: "Police", icon: "assets/police.png" },
-    { name: "Fire Service Number", en: "Fire Service", number: "999", category: "Fire", icon: "assets/fire-service.png" },
-    { name: "Ambulance Service", en: "Ambulance", number: "1994-999999", category: "Health", icon: "assets/ambulance.png" },
-    { name: "Women & Child Helpline", en: "Women & Child Helpline", number: "109", category: "Help", icon: "assets/emergency.png" },
-    { name: "Anti-Corruption Helpline", en: "Anti-Corruption", number: "106", category: "Govt.", icon: "assets/emergency.png" },
-    { name: "Electricity Helpline", en: "Electricity Outage", number: "16216", category: "Electricity", icon: "assets/emergency.png" },
-    { name: "Brac Helpline", en: "Brac", number: "16445", category: "NGO", icon: "assets/brac.png" },
-    { name: "Bangladesh Railway Helpline", en: "Bangladesh Railway", number: "163", category: "Travel", icon: "assets/Bangladesh-Railway.png" },
+  {
+    name: "National Emergency Number",
+    en: "National Emergency",
+    number: "999",
+    category: "All",
+    icon: "assets/emergency.png",
+  },
+  {
+    name: "Police Helpline Number",
+    en: "Police",
+    number: "999",
+    category: "Police",
+    icon: "assets/police.png",
+  },
+  {
+    name: "Fire Service Number",
+    en: "Fire Service",
+    number: "999",
+    category: "Fire",
+    icon: "assets/fire-service.png",
+  },
+  {
+    name: "Ambulance Service",
+    en: "Ambulance",
+    number: "1994-999999",
+    category: "Health",
+    icon: "assets/ambulance.png",
+  },
+  {
+    name: "Women & Child Helpline",
+    en: "Women & Child Helpline",
+    number: "109",
+    category: "Help",
+    icon: "assets/emergency.png",
+  },
+  {
+    name: "Anti-Corruption Helpline",
+    en: "Anti-Corruption",
+    number: "106",
+    category: "Govt.",
+    icon: "assets/emergency.png",
+  },
+  {
+    name: "Electricity Helpline",
+    en: "Electricity Outage",
+    number: "16216",
+    category: "Electricity",
+    icon: "assets/emergency.png",
+  },
+  {
+    name: "Brac Helpline",
+    en: "Brac",
+    number: "16445",
+    category: "NGO",
+    icon: "assets/brac.png",
+  },
+  {
+    name: "Bangladesh Railway Helpline",
+    en: "Bangladesh Railway",
+    number: "163",
+    category: "Travel",
+    icon: "assets/Bangladesh-Railway.png",
+  },
 ];
-
 
 // Counters
 let heartCount = 0;
@@ -25,14 +78,14 @@ const historyList = document.getElementById("historyList");
 const clearHistoryBtn = document.getElementById("clearHistory");
 
 // Render Cards
-services.forEach(service => {
-    const card = document.createElement("div");
-    card.className = "card-custom shadow-md bg-white p-4 rounded-lg";
+services.forEach((service) => {
+  const card = document.createElement("div");
+  card.className = "card-custom shadow-md bg-white p-4 rounded-lg";
 
-    card.innerHTML = `
+  card.innerHTML = `
   <div class="flex justify-between items-start">
     <img src="${service.icon}" alt="${service.name}" class="h-10 w-10 bg-red-100 rounded-md p-2"/>
-    <button class="heartBtn text-gray-400 hover:text-red-500">♡</button>
+    <button class="heartBtn text-3xl text-gray-400 hover:text-red-500">♡</button>
   </div>
   <div class="mt-3">
     <h3 class="font-bold text-black">${service.name}</h3>
@@ -54,42 +107,47 @@ services.forEach(service => {
   </div>
 `;
 
-    
+  cardSection.appendChild(card);
 
+  // Heart
+  card.querySelector(".heartBtn").addEventListener("click", () => {
+    heartCount++;
+    heartDisplay.textContent = heartCount;
+  });
 
-    cardSection.appendChild(card);
+  // Copy
+  card.querySelector(".copyBtn").addEventListener("click", () => {
+    navigator.clipboard.writeText(service.number);
+    copyCount++;
+    copyDisplay.textContent = copyCount;
+    alert(`Copied ${service.name} - ${service.number}`);
+  });
 
-    // Heart
-    card.querySelector(".heartBtn").addEventListener("click", () => {
-        heartCount++;
-        heartDisplay.textContent = heartCount;
-    });
+  // Call
+  card.querySelector(".callBtn").addEventListener("click", () => {
+    if (coinCount < 20) {
+      alert("Not enough coins to make a call!");
+      return;
+    }
+    coinCount -= 20;
+    coinDisplay.textContent = coinCount;
+    alert(`Calling ${service.name} - ${service.number}`);
 
-    // Copy
-    card.querySelector(".copyBtn").addEventListener("click", () => {
-        navigator.clipboard.writeText(service.number);
-        copyCount++;
-        copyDisplay.textContent = copyCount;
-        alert(`Copied ${service.name} - ${service.number}`);
-    });
-
-    // Call
-    card.querySelector(".callBtn").addEventListener("click", () => {
-        if (coinCount < 20) {
-            alert("Not enough coins to make a call!");
-            return;
-        }
-        coinCount -= 20;
-        coinDisplay.textContent = coinCount;
-        alert(`Calling ${service.name} - ${service.number}`);
-
-        const li = document.createElement("li");
-        li.textContent = `${service.name} - ${service.number} (${new Date().toLocaleTimeString()})`;
-        historyList.appendChild(li);
-    });
+    const HistoryItems = `<div class="w-full p-2 bg-gray-50 flex shadow justify-between items-center rounded-md">
+    <div>
+    <h2 class="font-bold text-black">${service.name}</h2>
+    <span class="text-sm text-gray-600">${service.number}</span>
+    </div>
+    <div>${new Date().toLocaleTimeString()}</div>
+     </div>`;
+    historyList.innerHTML = HistoryItems + historyList.innerHTML;
+    // const li = document.createElement("li");
+    // li.textContent = `${service.name} - ${service.number} (${new Date().toLocaleTimeString()})`;
+    // historyList.appendChild(li);
+  });
 });
 
 // Clear History
 clearHistoryBtn.addEventListener("click", () => {
-    historyList.innerHTML = "";
+  historyList.innerHTML = "";
 });
